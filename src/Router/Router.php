@@ -11,7 +11,7 @@ interface Router
     const SELF = 'self';
 
     // Options
-    const ABSOLUTE = 'ABSOLUTE';
+    const ABSOLUTE = 'absolute';
 
     /**
      * @return string
