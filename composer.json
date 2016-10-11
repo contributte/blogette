@@ -1,0 +1,26 @@
+{
+  "name": "blogette/platform",
+  "description": "Blogette Platform",
+  "type": "library",
+  "license": ["MIT"],
+  "homepage": "https://github.com/blogette/platform",
+  "authors": [
+    {
+      "name": "Milan Felix Sulc",
+      "homepage": "http://jfx.cz"
+    }
+  ],
+  "require": {
+    "php": ">= 5.6",
+    "nette/utils": "^2.4.1"
+  },
+  "require-dev": {
+    "nette/di": "^2.4.3",
+    "latte/latte": "^2.4.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Blogette\\": "src/"
+    }
+  }
+}
