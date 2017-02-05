@@ -27,10 +27,12 @@ final class ProviderCollection
 		return $this->providers[$name];
 	}
 
+	/**
+	 * @return Provider[]
+	 */
 	public function getAll()
 	{
 		return $this->providers;
 	}
-
 
 }

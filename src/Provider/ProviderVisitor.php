@@ -2,12 +2,7 @@
 
 namespace Blogette\Provider;
 
-use Blogette\Provider\Visiting\CompilableVisiting;
-use Blogette\Provider\Visiting\DumpableVisiting;
-use Blogette\Provider\Visiting\LinkableVisiting;
-
-interface ProviderVisitor extends CompilableVisiting, DumpableVisiting, LinkableVisiting
+interface ProviderVisitor extends \Blogette\Provider\Visiting\CompilableVisiting, \Blogette\Provider\Visiting\DumpableVisiting, \Blogette\Provider\Visiting\LinkableVisiting
 {
-
 
 }

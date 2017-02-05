@@ -8,7 +8,7 @@ use Blogette\Provider\ProviderVisitor;
 use Blogette\Provider\UnifiedProvider;
 use Blogette\Router\Link\Link;
 use Blogette\Router\Link\ProviderLink;
-use Blogette\Router\SimpleLinker;
+use Blogette\Router\LinkBuilder;
 use Blogette\Template\Compiler;
 use Blogette\Template\Dumper;
 use Blogette\Template\Template;
@@ -66,7 +66,7 @@ final class SitemapProvider extends UnifiedProvider
 	public function dump(Template $template, Dumper $dumper)
 	{
 		// Generate HTML page
-		$linker = new SimpleLinker($this->endpoint->getPattern(), []);
+		$linker = new LinkBuilder($this->endpoint->getPattern(), []);
 		$dumper->dump($linker, $template);
 	}
 

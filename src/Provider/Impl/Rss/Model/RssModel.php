@@ -5,7 +5,6 @@ namespace Blogette\Provider\Impl\Rss\Model;
 use Nette\InvalidStateException;
 use Nette\Utils\DateTime;
 use Nette\Utils\Strings;
-use stdClass;
 
 /**
  * @property string $title
@@ -38,8 +37,8 @@ final class RssModel
 	public function __construct()
 	{
 		// Set default prepare handlers
-		$this->onPrepareProperties[] = [$this, "prepareProperties"];
-		$this->onPrepareItem[] = [$this, "prepareItem"];
+		$this->onPrepareProperties[] = [$this, 'prepareProperties'];
+		$this->onPrepareItem[] = [$this, 'prepareItem'];
 	}
 
 	/**
@@ -54,12 +53,12 @@ final class RssModel
 			$date = (int) $date;
 		}
 
-		if (is_string($date) && !Strings::endsWith($date, "GMT")) {
+		if (is_string($date) && !Strings::endsWith($date, 'GMT')) {
 			$date = strtotime($date);
 		}
 
 		if (is_int($date)) {
-			$date = gmdate('D, d M Y H:i:s', $date) . " GMT";
+			$date = gmdate('D, d M Y H:i:s', $date) . ' GMT';
 		}
 
 		return $date;
@@ -68,41 +67,44 @@ final class RssModel
 	/**
 	 * Prepare channel properties
 	 *
+	 * @param array $properties
 	 * @return void
 	 */
-	public function prepareProperties($properties)
+	public function prepareProperties(array $properties)
 	{
-		if (isset($properties["pubDate"])) {
-			$properties["pubDate"] = self::prepareDate($properties["pubDate"]);
+		if (isset($properties['pubDate'])) {
+			$properties['pubDate'] = self::prepareDate($properties['pubDate']);
 		}
 
-		if (isset($properties["lastBuildDate"])) {
-			$properties["lastBuildDate"] = self::prepareDate($properties["lastBuildDate"]);
+		if (isset($properties['lastBuildDate'])) {
+			$properties['lastBuildDate'] = self::prepareDate($properties['lastBuildDate']);
 		}
 	}
 
 	/**
 	 * Prepare item
 	 *
+	 * @param array $item
 	 * @return array
 	 */
-	public function prepareItem($item)
+	public function prepareItem(array $item)
 	{
 		// guid & link
-		if (empty($item["guid"]) && isset($item["link"])) {
-			$item["guid"] = $item["link"];
+		if (empty($item['guid']) && isset($item['link'])) {
+			$item['guid'] = $item['link'];
 		}
 
-		if (empty($item["link"]) && isset($item["guid"])) {
-			$item["link"] = $item["guid"];
+		if (empty($item['link']) && isset($item['guid'])) {
+			$item['link'] = $item['guid'];
 		}
 
 		// pubDate
-		if (isset($item["pubDate"])) {
-			$item["pubDate"] = self::prepareDate($item["pubDate"]);
+		if (isset($item['pubDate'])) {
+			$item['pubDate'] = self::prepareDate($item['pubDate']);
 		}
-	}
 
+		return $item;
+	}
 
 	/**
 	 * GETTERS/SETTERS *********************************************************
@@ -110,10 +112,9 @@ final class RssModel
 	 */
 
 	/**
-	 * Set channel property
-	 *
 	 * @param string $name
 	 * @param mixed $value
+	 * @return void
 	 */
 	public function setChannelProperty($name, $value)
 	{
@@ -121,8 +122,6 @@ final class RssModel
 	}
 
 	/**
-	 * Get channel property
-	 *
 	 * @param string $name
 	 * @return mixed
 	 */
@@ -132,8 +131,6 @@ final class RssModel
 	}
 
 	/**
-	 * Get properties
-	 *
 	 * @return array
 	 */
 	public function getProperties()
@@ -142,69 +139,59 @@ final class RssModel
 	}
 
 	/**
-	 * Set title
-	 *
 	 * @param string $title
+	 * @return void
 	 */
 	public function setTitle($title)
 	{
-		$this->setChannelProperty("title", $title);
+		$this->setChannelProperty('title', $title);
 	}
 
 	/**
-	 * Get title
-	 *
 	 * @return string
 	 */
 	public function getTitle()
 	{
-		return $this->getChannelProperty("title");
+		return $this->getChannelProperty('title');
 	}
 
 	/**
-	 * Set description
-	 *
 	 * @param string $description
+	 * @return void
 	 */
 	public function setDescription($description)
 	{
-		$this->setChannelProperty("description", $description);
+		$this->setChannelProperty('description', $description);
 	}
 
 	/**
-	 * Get description
-	 *
 	 * @return string
 	 */
 	public function getDescription()
 	{
-		return $this->getChannelProperty("description");
+		return $this->getChannelProperty('description');
 	}
 
 	/**
-	 * Set link
-	 *
 	 * @param string $link
+	 * @return void
 	 */
 	public function setLink($link)
 	{
-		$this->setChannelProperty("link", $link);
+		$this->setChannelProperty('link', $link);
 	}
 
 	/**
-	 * Get link
-	 *
 	 * @return string
 	 */
 	public function getLink()
 	{
-		return $this->getChannelProperty("link");
+		return $this->getChannelProperty('link');
 	}
 
 	/**
-	 * Set items
-	 *
 	 * @param array $items
+	 * @return void
 	 */
 	public function setItems($items)
 	{
@@ -212,18 +199,15 @@ final class RssModel
 	}
 
 	/**
-	 * Add item
-	 *
-	 * @param array $items
+	 * @param array $item
+	 * @return void
 	 */
-	public function addItem($item)
+	public function addItem(array $item)
 	{
 		$this->items[] = $item;
 	}
 
 	/**
-	 * Get items
-	 *
 	 * @return array
 	 */
 	public function getItems()
@@ -234,7 +218,7 @@ final class RssModel
 	/**
 	 * Creates RSS feed
 	 *
-	 * @return stdClass
+	 * @return object
 	 */
 	public function create()
 	{
@@ -245,8 +229,8 @@ final class RssModel
 		}
 
 		// check
-		if (empty($properties["title"]) || empty($properties["description"]) || empty($properties["link"])) {
-			throw new InvalidStateException("At least one of mandatory properties title, description or link was not set.");
+		if (empty($properties['title']) || empty($properties['description']) || empty($properties['link'])) {
+			throw new InvalidStateException('At least one of mandatory properties title, description or link was not set.');
 		}
 
 		// items
@@ -257,8 +241,8 @@ final class RssModel
 			}
 
 			// check
-			if (empty($item["title"]) && empty($item["description"])) {
-				throw new InvalidStateException("One of title or description has to be set.");
+			if (empty($item['title']) && empty($item['description'])) {
+				throw new InvalidStateException('One of title or description has to be set.');
 			}
 		}
 
@@ -267,4 +251,5 @@ final class RssModel
 			'items' => $items,
 		];
 	}
+
 }

@@ -26,4 +26,5 @@ final class SitemapProviderFactory extends AbstractProviderFactory
 	{
 		return new SitemapProvider(new SitemapEndpoint($this->pattern, $this->file), $this->posts);
 	}
+
 }

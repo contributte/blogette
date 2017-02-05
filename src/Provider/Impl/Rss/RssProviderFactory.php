@@ -24,7 +24,7 @@ final class RssProviderFactory extends AbstractProviderFactory
 	 */
 	public function create()
 	{
-		return new RssProvider(new RssEndpoint($this->pattern, $this->file), $this->posts);
+		return new RssProvider(new RssEndpoint($this->pattern, $this->file, $this->configuration), $this->posts);
 	}
 
 }

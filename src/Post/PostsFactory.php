@@ -46,12 +46,12 @@ final class PostsFactory
 
 			// Parse headline, perex and content
 			$content = @file_get_contents($contentfile);
-			$matches1 = Strings::match($content, "#(.*)" . self::HEADLINE . "(.*)#s");
+			$matches1 = Strings::match($content, '#(.*)' . self::HEADLINE . '(.*)#s');
 
 			// Skip invalid content
 			if (!$matches1) continue;
 
-			$matches2 = Strings::match($matches1[2], "#(.*)" . self::PAGEBREAK . "(.*)#s");
+			$matches2 = Strings::match($matches1[2], '#(.*)' . self::PAGEBREAK . '(.*)#s');
 			// Skip invalid content
 			if (!$matches2) continue;
 

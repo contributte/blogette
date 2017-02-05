@@ -2,8 +2,7 @@
 
 namespace Blogette\Router;
 
-
-final class SimpleLinker implements Linker
+final class LinkBuilder implements Linker
 {
 
 	// Pattern
@@ -25,7 +24,6 @@ final class SimpleLinker implements Linker
 		$this->map = $map;
 	}
 
-
 	/**
 	 * @return string
 	 */
@@ -39,13 +37,11 @@ final class SimpleLinker implements Linker
 			list ($whole, $param) = $matches;
 
 			if (!isset($this->map[$param])) {
-				bdump($this->map);
 				throw new \RuntimeException('Invalid pattern, ..');
 			}
 
 			return $this->map[$param];
 		}, $this->pattern);
 	}
-
 
 }

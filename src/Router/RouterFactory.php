@@ -23,6 +23,7 @@ final class RouterFactory
 
 	/**
 	 * @param array $configuration
+	 * @return void
 	 */
 	public function setConfiguration($configuration)
 	{

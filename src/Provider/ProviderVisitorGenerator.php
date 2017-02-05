@@ -14,18 +14,18 @@ final class ProviderVisitorGenerator implements ProviderVisitor
 {
 
 	/** @var TemplateGenerator */
-	private $templater;
+	private $templateGenerator;
 
 	/** @var Router */
 	private $router;
 
 	/**
-	 * @param TemplateGenerator $templater
+	 * @param TemplateGenerator $templateGenerator
 	 * @param Router $router
 	 */
-	public function __construct(TemplateGenerator $templater, Router $router)
+	public function __construct(TemplateGenerator $templateGenerator, Router $router)
 	{
-		$this->templater = $templater;
+		$this->templateGenerator = $templateGenerator;
 		$this->router = $router;
 	}
 
@@ -35,7 +35,7 @@ final class ProviderVisitorGenerator implements ProviderVisitor
 	 */
 	public function compile(CompileProviding $providing)
 	{
-		return $this->templater->compile($providing);
+		return $this->templateGenerator->compile($providing);
 	}
 
 	/**
@@ -45,7 +45,7 @@ final class ProviderVisitorGenerator implements ProviderVisitor
 	 */
 	public function dump(Template $template, DumpProviding $providing)
 	{
-		$this->templater->dump($template, $providing);
+		$this->templateGenerator->dump($template, $providing);
 	}
 
 	/**
@@ -56,4 +56,5 @@ final class ProviderVisitorGenerator implements ProviderVisitor
 	{
 		return $providing->link(new RouterLink($this->router));
 	}
+
 }

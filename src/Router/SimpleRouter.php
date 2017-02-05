@@ -39,6 +39,7 @@ final class SimpleRouter implements Router
 
 	/**
 	 * @param string $base
+	 * @return void
 	 */
 	public function setBase($base)
 	{
@@ -55,6 +56,7 @@ final class SimpleRouter implements Router
 
 	/**
 	 * @param string $host
+	 * @return void
 	 */
 	public function setHost($host)
 	{
@@ -70,12 +72,12 @@ final class SimpleRouter implements Router
 	public function link($mask, array $args = [], array $options = [])
 	{
 		if ($mask === self::SELF) {
-			return new SelfLink($this, $args, $options);
+			return new SelfLink($this, $options);
 		}
 
 		$provider = $this->providers->get($mask);
 		if (!$provider) {
-			throw new \RuntimeException('Invalid...' . $mask);
+			throw new \RuntimeException('No provider for link found:' . $mask);
 		}
 
 		if (!($provider instanceof LinkProviding)) {

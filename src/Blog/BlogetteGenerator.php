@@ -5,7 +5,7 @@ namespace Blogette\Blog;
 use Blogette\Provider\ProviderCollection;
 use Blogette\Provider\ProviderVisitor;
 
-final class BlogetteGenerator
+final class BlogetteGenerator implements Generator
 {
 
 	/** @var ProviderCollection */
@@ -24,6 +24,11 @@ final class BlogetteGenerator
 		$this->visitor = $visitor;
 	}
 
+	/**
+	 * Iterate over all providers and generate content
+	 *
+	 * @return void
+	 */
 	public function generate()
 	{
 		foreach ($this->providers->getAll() as $provider) {
@@ -31,4 +36,5 @@ final class BlogetteGenerator
 			$provider->provide($this->visitor);
 		}
 	}
+
 }

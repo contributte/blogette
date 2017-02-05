@@ -1,4 +1,5 @@
 <?php
+
 namespace Blogette\Template;
 
 use Blogette\Router\Link\Link;

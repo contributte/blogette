@@ -11,6 +11,9 @@ abstract class AbstractProviderFactory implements ProviderFactory
 	/** @var string */
 	protected $file;
 
+	/** @var array */
+	protected $configuration = [];
+
 	/**
 	 * @return string
 	 */
@@ -21,6 +24,7 @@ abstract class AbstractProviderFactory implements ProviderFactory
 
 	/**
 	 * @param string $pattern
+	 * @return void
 	 */
 	public function setPattern($pattern)
 	{
@@ -37,9 +41,28 @@ abstract class AbstractProviderFactory implements ProviderFactory
 
 	/**
 	 * @param string $file
+	 * @return void
 	 */
 	public function setFile($file)
 	{
 		$this->file = $file;
 	}
+
+	/**
+	 * @return array
+	 */
+	public function getConfiguration()
+	{
+		return $this->configuration;
+	}
+
+	/**
+	 * @param array $configuration
+	 * @return void
+	 */
+	public function setConfiguration(array $configuration)
+	{
+		$this->configuration = $configuration;
+	}
+
 }

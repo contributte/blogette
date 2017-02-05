@@ -11,6 +11,7 @@ final class ProviderCollectionFactory
 	/**
 	 * @param string $name
 	 * @param ProviderFactory $factory
+	 * @return void
 	 */
 	public function addProviderFactory($name, ProviderFactory $factory)
 	{
@@ -23,6 +24,7 @@ final class ProviderCollectionFactory
 	public function create()
 	{
 		$providers = [];
+
 		foreach ($this->factories as $name => $factory) {
 			$providers[$name] = $factory->create();
 		}

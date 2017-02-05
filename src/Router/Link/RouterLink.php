@@ -26,12 +26,4 @@ final class RouterLink implements Link
 		return $this->router;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function __toString()
-	{
-		throw new \RuntimeException();
-	}
-
 }

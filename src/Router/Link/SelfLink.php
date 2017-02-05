@@ -11,20 +11,15 @@ final class SelfLink implements Link
 	private $router;
 
 	/** @var array */
-	private $args;
-
-	/** @var array */
 	private $options;
 
 	/**
 	 * @param Router $router
-	 * @param array $args
 	 * @param array $options
 	 */
-	public function __construct(Router $router, array $args = [], array $options = [])
+	public function __construct(Router $router, array $options = [])
 	{
 		$this->router = $router;
-		$this->args = $args;
 		$this->options = $options;
 	}
 

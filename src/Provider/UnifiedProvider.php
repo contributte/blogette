@@ -2,11 +2,7 @@
 
 namespace Blogette\Provider;
 
-use Blogette\Provider\Providing\CompileProviding;
-use Blogette\Provider\Providing\DumpProviding;
-use Blogette\Provider\Providing\LinkProviding;
-
-abstract class UnifiedProvider implements Provider, CompileProviding, DumpProviding, LinkProviding
+abstract class UnifiedProvider implements Provider, \Blogette\Provider\Providing\CompileProviding, \Blogette\Provider\Providing\DumpProviding, \Blogette\Provider\Providing\LinkProviding
 {
 
 }

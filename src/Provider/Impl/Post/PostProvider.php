@@ -8,7 +8,7 @@ use Blogette\Provider\ProviderVisitor;
 use Blogette\Provider\UnifiedProvider;
 use Blogette\Router\Link\Link;
 use Blogette\Router\Link\ProviderLink;
-use Blogette\Router\SimpleLinker;
+use Blogette\Router\LinkBuilder;
 use Blogette\Template\Compiler;
 use Blogette\Template\Dumper;
 use Blogette\Template\Template;
@@ -39,6 +39,7 @@ final class PostProvider extends UnifiedProvider
 
 	/**
 	 * @param ProviderVisitor $visitor
+	 * @return void
 	 */
 	public function provide(ProviderVisitor $visitor)
 	{
@@ -49,6 +50,9 @@ final class PostProvider extends UnifiedProvider
 			// Apply visitor
 			$template = $visitor->compile($this);
 			$visitor->dump($template, $this);
+
+			// Reset current post
+			$this->post = NULL;
 		}
 	}
 
@@ -94,6 +98,7 @@ final class PostProvider extends UnifiedProvider
 	 */
 	public function link(Link $link)
 	{
+		// @todo argument ID validation
 		$id = $link->getArgs()['id'];
 		$post = $this->posts->getOne($id);
 		$linker = $this->createLinker($post);
@@ -107,11 +112,11 @@ final class PostProvider extends UnifiedProvider
 
 	/**
 	 * @param Post $post
-	 * @return SimpleLinker
+	 * @return LinkBuilder
 	 */
 	private function createLinker(Post $post)
 	{
-		return new SimpleLinker($this->endpoint->getPattern(), [
+		return new LinkBuilder($this->endpoint->getPattern(), [
 			'id' => $post->id,
 			'day' => DateTime::from($post->date)->format('d'),
 			'month' => DateTime::from($post->date)->format('m'),

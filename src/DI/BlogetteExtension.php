@@ -38,6 +38,11 @@ final class BlogetteExtension extends CompilerExtension
 		'endpoints' => [],
 	];
 
+	/**
+	 * Register services
+	 *
+	 * @return void
+	 */
 	public function loadConfiguration()
 	{
 		$builder = $this->getContainerBuilder();
@@ -98,6 +103,11 @@ final class BlogetteExtension extends CompilerExtension
 		}
 	}
 
+	/**
+	 * Decorate services
+	 *
+	 * @return void
+	 */
 	public function beforeCompile()
 	{
 		$builder = $this->getContainerBuilder();
@@ -107,6 +117,5 @@ final class BlogetteExtension extends CompilerExtension
 				->addSetup('addFilter', [$def]);
 		}
 	}
-
 
 }

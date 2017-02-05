@@ -27,4 +27,5 @@ final class PostProviderFactory extends AbstractProviderFactory
 	{
 		return new PostProvider(new PostEndpoint($this->pattern, $this->file), $this->posts);
 	}
+
 }

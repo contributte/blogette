@@ -8,8 +8,8 @@ use Blogette\Provider\ProviderVisitor;
 use Blogette\Provider\UnifiedProvider;
 use Blogette\Router\Link\Link;
 use Blogette\Router\Link\ProviderLink;
+use Blogette\Router\LinkBuilder;
 use Blogette\Router\Router;
-use Blogette\Router\SimpleLinker;
 use Blogette\Template\Compiler;
 use Blogette\Template\Dumper;
 use Blogette\Template\Template;
@@ -52,11 +52,16 @@ final class RssProvider extends UnifiedProvider
 		$model = new RssModel();
 
 		// Prepare channel
-		$model->setTitle('Felix DevBlog');
+		$model->setTitle($this->endpoint->getAttribute('title'));
 		$model->setLink($compiler->link('self', [], [Router::ABSOLUTE => TRUE]));
-		$model->setDescription('Blog o programování a tak..');
-		$model->setChannelProperty("lastBuildDate", time());
-		$model->setChannelProperty("language", 'cs');
+		if ($this->endpoint->hasAttribute('description')) {
+			$model->setDescription($this->endpoint->getAttribute('description'));
+		}
+
+		$model->setChannelProperty('lastBuildDate', time());
+		foreach ($this->endpoint->getAttribute('channel', []) as $key => $value) {
+			$model->setChannelProperty($key, $value);
+		}
 
 		// Find posts
 		$posts = $this->posts->getAll();
@@ -88,7 +93,7 @@ final class RssProvider extends UnifiedProvider
 	public function dump(Template $template, Dumper $dumper)
 	{
 		// Generate HTML page
-		$linker = new SimpleLinker($this->endpoint->getPattern(), []);
+		$linker = new LinkBuilder($this->endpoint->getPattern(), []);
 		$dumper->dump($linker, $template);
 	}
 
@@ -100,4 +105,5 @@ final class RssProvider extends UnifiedProvider
 	{
 		return $this->endpoint->getPattern();
 	}
+
 }
