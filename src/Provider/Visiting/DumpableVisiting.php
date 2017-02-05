@@ -8,11 +8,11 @@ use Blogette\Template\Template;
 interface DumpableVisiting
 {
 
-    /**
-     * @param Template $template
-     * @param DumpProviding $providing
-     * @return void
-     */
-    public function dump(Template $template, DumpProviding $providing);
+	/**
+	 * @param Template $template
+	 * @param DumpProviding $providing
+	 * @return void
+	 */
+	public function dump(Template $template, DumpProviding $providing);
 
 }

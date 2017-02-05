@@ -8,10 +8,10 @@ use Blogette\Template\Template;
 interface CompilableVisiting
 {
 
-    /**
-     * @param CompileProviding $providing
-     * @return Template
-     */
-    public function compile(CompileProviding $providing);
+	/**
+	 * @param CompileProviding $providing
+	 * @return Template
+	 */
+	public function compile(CompileProviding $providing);
 
 }

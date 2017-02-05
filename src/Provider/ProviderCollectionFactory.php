@@ -5,29 +5,29 @@ namespace Blogette\Provider;
 final class ProviderCollectionFactory
 {
 
-    /** @var ProviderFactory[] */
-    private $factories = [];
+	/** @var ProviderFactory[] */
+	private $factories = [];
 
-    /**
-     * @param string $name
-     * @param ProviderFactory $factory
-     */
-    public function addProviderFactory($name, ProviderFactory $factory)
-    {
-        $this->factories[$name] = $factory;
-    }
+	/**
+	 * @param string $name
+	 * @param ProviderFactory $factory
+	 */
+	public function addProviderFactory($name, ProviderFactory $factory)
+	{
+		$this->factories[$name] = $factory;
+	}
 
-    /**
-     * @return ProviderCollection
-     */
-    public function create()
-    {
-        $providers = [];
-        foreach ($this->factories as $name => $factory) {
-            $providers[$name] = $factory->create();
-        }
+	/**
+	 * @return ProviderCollection
+	 */
+	public function create()
+	{
+		$providers = [];
+		foreach ($this->factories as $name => $factory) {
+			$providers[$name] = $factory->create();
+		}
 
-        return new ProviderCollection($providers);
-    }
+		return new ProviderCollection($providers);
+	}
 
 }

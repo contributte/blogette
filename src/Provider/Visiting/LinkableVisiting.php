@@ -7,10 +7,10 @@ use Blogette\Provider\Providing\LinkProviding;
 interface LinkableVisiting
 {
 
-    /**
-     * @param LinkProviding $providing
-     * @return string
-     */
-    public function link(LinkProviding $providing);
+	/**
+	 * @param LinkProviding $providing
+	 * @return string
+	 */
+	public function link(LinkProviding $providing);
 
 }

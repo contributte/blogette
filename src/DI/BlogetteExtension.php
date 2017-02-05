@@ -23,90 +23,90 @@ use Nette\DI\CompilerExtension;
 final class BlogetteExtension extends CompilerExtension
 {
 
-    /** @var array */
-    private $defaults = [
-        'blog' => [
-            'posts' => '%appDir/%templates%',
-        ],
-        'router' => [
-            'base' => NULL,
-            'prefix' => NULL,
-        ],
-        'build' => [
-            'dir' => '%appDir/../build',
-        ],
-        'endpoints' => [],
-    ];
+	/** @var array */
+	private $defaults = [
+		'blog' => [
+			'posts' => '%appDir/%templates%',
+		],
+		'router' => [
+			'base' => NULL,
+			'prefix' => NULL,
+		],
+		'build' => [
+			'dir' => '%appDir/../build',
+		],
+		'endpoints' => [],
+	];
 
-    public function loadConfiguration()
-    {
-        $builder = $this->getContainerBuilder();
-        $config = $this->validateConfig($this->defaults);
+	public function loadConfiguration()
+	{
+		$builder = $this->getContainerBuilder();
+		$config = $this->validateConfig($this->defaults);
 
-        $builder->addDefinition($this->prefix('generator'))
-            ->setClass(BlogetteGenerator::class);
+		$builder->addDefinition($this->prefix('generator'))
+			->setClass(BlogetteGenerator::class);
 
-        $builder->addDefinition($this->prefix('latte.factory'))
-            ->setClass(LatteFactory::class);
+		$builder->addDefinition($this->prefix('latte.factory'))
+			->setClass(LatteFactory::class);
 
-        $builder->addDefinition($this->prefix('router.factory'))
-            ->setClass(RouterFactory::class)
-            ->addSetup('setConfiguration', [$config['router']]);
+		$builder->addDefinition($this->prefix('router.factory'))
+			->setClass(RouterFactory::class)
+			->addSetup('setConfiguration', [$config['router']]);
 
-        $builder->addDefinition($this->prefix('router'))
-            ->setClass(SimpleRouter::class)
-            ->setFactory('@' . $this->prefix('router.factory') . '::create');
+		$builder->addDefinition($this->prefix('router'))
+			->setClass(SimpleRouter::class)
+			->setFactory('@' . $this->prefix('router.factory') . '::create');
 
-        $builder->addDefinition($this->prefix('template.generator'))
-            ->setClass(TemplateGenerator::class);
+		$builder->addDefinition($this->prefix('template.generator'))
+			->setClass(TemplateGenerator::class);
 
-        $builder->addDefinition($this->prefix('template.compiler'))
-            ->setClass(TemplateCompiler::class);
+		$builder->addDefinition($this->prefix('template.compiler'))
+			->setClass(TemplateCompiler::class);
 
-        $builder->addDefinition($this->prefix('template.dumper'))
-            ->setClass(TemplateDumper::class, [$config['build']['dir']]);
+		$builder->addDefinition($this->prefix('template.dumper'))
+			->setClass(TemplateDumper::class, [$config['build']['dir']]);
 
-        $builder->addDefinition($this->prefix('template.adapter'))
-            ->setClass(LatteEngineAdapter::class);
+		$builder->addDefinition($this->prefix('template.adapter'))
+			->setClass(LatteEngineAdapter::class);
 
-        $builder->addDefinition($this->prefix('collector'))
-            ->setClass(PostCollector::class, [$config['blog']['posts']]);
+		$builder->addDefinition($this->prefix('collector'))
+			->setClass(PostCollector::class, [$config['blog']['posts']]);
 
-        $builder->addDefinition($this->prefix('posts.factory'))
-            ->setClass(PostsFactory::class);
+		$builder->addDefinition($this->prefix('posts.factory'))
+			->setClass(PostsFactory::class);
 
-        $builder->addDefinition($this->prefix('posts'))
-            ->setClass(PostCollection::class)
-            ->setFactory('@' . $this->prefix('posts.factory') . '::create');
+		$builder->addDefinition($this->prefix('posts'))
+			->setClass(PostCollection::class)
+			->setFactory('@' . $this->prefix('posts.factory') . '::create');
 
-        $builder->addDefinition($this->prefix('provider.visitor'))
-            ->setClass(ProviderVisitorGenerator::class);
+		$builder->addDefinition($this->prefix('provider.visitor'))
+			->setClass(ProviderVisitorGenerator::class);
 
-        $builder->addDefinition($this->prefix('providers.factory'))
-            ->setClass(ProviderCollectionFactory::class);
+		$builder->addDefinition($this->prefix('providers.factory'))
+			->setClass(ProviderCollectionFactory::class);
 
-        $builder->addDefinition($this->prefix('providers'))
-            ->setClass(ProviderCollection::class)
-            ->setFactory('@' . $this->prefix('providers.factory') . '::create');
+		$builder->addDefinition($this->prefix('providers'))
+			->setClass(ProviderCollection::class)
+			->setFactory('@' . $this->prefix('providers.factory') . '::create');
 
-        foreach ($config['endpoints'] as $name => $provider) {
-            $providerFactory = $this->prefix('providers.factory.' . $name);
-            Compiler::loadDefinition($builder->addDefinition($providerFactory), $provider);
+		foreach ($config['endpoints'] as $name => $provider) {
+			$providerFactory = $this->prefix('providers.factory.' . $name);
+			Compiler::loadDefinition($builder->addDefinition($providerFactory), $provider);
 
-            $builder->getDefinition($this->prefix('providers.factory'))
-                ->addSetup('addProviderFactory', [$name, $builder->getDefinition($providerFactory)]);
-        }
-    }
+			$builder->getDefinition($this->prefix('providers.factory'))
+				->addSetup('addProviderFactory', [$name, $builder->getDefinition($providerFactory)]);
+		}
+	}
 
-    public function beforeCompile()
-    {
-        $builder = $this->getContainerBuilder();
+	public function beforeCompile()
+	{
+		$builder = $this->getContainerBuilder();
 
-        foreach ($builder->findByType(Filter::class) as $name => $def) {
-            $builder->getDefinition($this->prefix('template.adapter'))
-                ->addSetup('addFilter', [$def]);
-        }
-    }
+		foreach ($builder->findByType(Filter::class) as $name => $def) {
+			$builder->getDefinition($this->prefix('template.adapter'))
+				->addSetup('addFilter', [$def]);
+		}
+	}
 
 
 }

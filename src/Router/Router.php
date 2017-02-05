@@ -7,35 +7,35 @@ use Blogette\Router\Link\Link;
 interface Router
 {
 
-    // Link aliases
-    const SELF = 'self';
+	// Link aliases
+	const SELF = 'self';
 
-    // Options
-    const ABSOLUTE = 'absolute';
+	// Options
+	const ABSOLUTE = 'absolute';
 
-    /**
-     * @return string
-     */
-    public function getBase();
+	/**
+	 * @return string
+	 */
+	public function getBase();
 
-    /**
-     * @return string
-     */
-    public function getHost();
+	/**
+	 * @return string
+	 */
+	public function getHost();
 
-    /**
-     * @param string $mask
-     * @param array $args
-     * @param array $options
-     * @return Link
-     */
-    public function link($mask, array $args = [], array $options = []);
+	/**
+	 * @param string $mask
+	 * @param array $args
+	 * @param array $options
+	 * @return Link
+	 */
+	public function link($mask, array $args = [], array $options = []);
 
-    /**
-     * @param string $uri
-     * @param array $options
-     * @return string
-     */
-    public function construct($uri, array $options = []);
+	/**
+	 * @param string $uri
+	 * @param array $options
+	 * @return string
+	 */
+	public function construct($uri, array $options = []);
 
 }

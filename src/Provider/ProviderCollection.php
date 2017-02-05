@@ -5,32 +5,32 @@ namespace Blogette\Provider;
 final class ProviderCollection
 {
 
-    /** @var Provider[] */
-    private $providers;
+	/** @var Provider[] */
+	private $providers;
 
-    /**
-     * @param Provider[] $providers
-     */
-    public function __construct(array $providers)
-    {
-        $this->providers = $providers;
-    }
+	/**
+	 * @param Provider[] $providers
+	 */
+	public function __construct(array $providers)
+	{
+		$this->providers = $providers;
+	}
 
-    /**
-     * @param string $name
-     * @return Provider
-     */
-    public function get($name)
-    {
-        if (!isset($this->providers[$name])) return NULL;
+	/**
+	 * @param string $name
+	 * @return Provider
+	 */
+	public function get($name)
+	{
+		if (!isset($this->providers[$name])) return NULL;
 
-        return $this->providers[$name];
-    }
+		return $this->providers[$name];
+	}
 
-    public function getAll()
-    {
-        return $this->providers;
-    }
+	public function getAll()
+	{
+		return $this->providers;
+	}
 
 
 }

@@ -8,23 +8,23 @@ use Blogette\Provider\AbstractProviderFactory;
 final class PostProviderFactory extends AbstractProviderFactory
 {
 
-    /** @var PostCollection */
-    private $posts;
+	/** @var PostCollection */
+	private $posts;
 
-    /**
-     * @param PostCollection $posts
-     */
-    public function __construct(PostCollection $posts)
-    {
-        $this->posts = $posts;
-    }
+	/**
+	 * @param PostCollection $posts
+	 */
+	public function __construct(PostCollection $posts)
+	{
+		$this->posts = $posts;
+	}
 
 
-    /**
-     * @return PostProvider
-     */
-    public function create()
-    {
-        return new PostProvider(new PostEndpoint($this->pattern, $this->file), $this->posts);
-    }
+	/**
+	 * @return PostProvider
+	 */
+	public function create()
+	{
+		return new PostProvider(new PostEndpoint($this->pattern, $this->file), $this->posts);
+	}
 }

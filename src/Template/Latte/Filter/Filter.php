@@ -7,10 +7,10 @@ use Latte\Engine;
 interface Filter
 {
 
-    /**
-     * @param Engine $latte
-     * @return void
-     */
-    public function register(Engine $latte);
+	/**
+	 * @param Engine $latte
+	 * @return void
+	 */
+	public function register(Engine $latte);
 
 }

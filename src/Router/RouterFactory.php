@@ -7,44 +7,44 @@ use Blogette\Provider\ProviderCollection;
 final class RouterFactory
 {
 
-    /** @var ProviderCollection */
-    private $providers;
+	/** @var ProviderCollection */
+	private $providers;
 
-    /** @var array */
-    private $configuration = [];
+	/** @var array */
+	private $configuration = [];
 
-    /**
-     * @param ProviderCollection $providers
-     */
-    public function __construct(ProviderCollection $providers)
-    {
-        $this->providers = $providers;
-    }
+	/**
+	 * @param ProviderCollection $providers
+	 */
+	public function __construct(ProviderCollection $providers)
+	{
+		$this->providers = $providers;
+	}
 
-    /**
-     * @param array $configuration
-     */
-    public function setConfiguration($configuration)
-    {
-        $this->configuration = $configuration;
-    }
+	/**
+	 * @param array $configuration
+	 */
+	public function setConfiguration($configuration)
+	{
+		$this->configuration = $configuration;
+	}
 
-    /**
-     * @return Router
-     */
-    public function create()
-    {
-        $router = new SimpleRouter($this->providers);
+	/**
+	 * @return Router
+	 */
+	public function create()
+	{
+		$router = new SimpleRouter($this->providers);
 
-        if (isset($this->configuration['base'])) {
-            $router->setBase($this->configuration['base']);
-        }
+		if (isset($this->configuration['base'])) {
+			$router->setBase($this->configuration['base']);
+		}
 
-        if (isset($this->configuration['host'])) {
-            $router->setHost($this->configuration['host']);
-        }
+		if (isset($this->configuration['host'])) {
+			$router->setHost($this->configuration['host']);
+		}
 
-        return $router;
-    }
+		return $router;
+	}
 
 }

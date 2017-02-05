@@ -13,47 +13,47 @@ use Blogette\Template\TemplateGenerator;
 final class ProviderVisitorGenerator implements ProviderVisitor
 {
 
-    /** @var TemplateGenerator */
-    private $templater;
+	/** @var TemplateGenerator */
+	private $templater;
 
-    /** @var Router */
-    private $router;
+	/** @var Router */
+	private $router;
 
-    /**
-     * @param TemplateGenerator $templater
-     * @param Router $router
-     */
-    public function __construct(TemplateGenerator $templater, Router $router)
-    {
-        $this->templater = $templater;
-        $this->router = $router;
-    }
+	/**
+	 * @param TemplateGenerator $templater
+	 * @param Router $router
+	 */
+	public function __construct(TemplateGenerator $templater, Router $router)
+	{
+		$this->templater = $templater;
+		$this->router = $router;
+	}
 
-    /**
-     * @param CompileProviding $providing
-     * @return Template
-     */
-    public function compile(CompileProviding $providing)
-    {
-        return $this->templater->compile($providing);
-    }
+	/**
+	 * @param CompileProviding $providing
+	 * @return Template
+	 */
+	public function compile(CompileProviding $providing)
+	{
+		return $this->templater->compile($providing);
+	}
 
-    /**
-     * @param Template $template
-     * @param DumpProviding $providing
-     * @return void
-     */
-    public function dump(Template $template, DumpProviding $providing)
-    {
-        $this->templater->dump($template, $providing);
-    }
+	/**
+	 * @param Template $template
+	 * @param DumpProviding $providing
+	 * @return void
+	 */
+	public function dump(Template $template, DumpProviding $providing)
+	{
+		$this->templater->dump($template, $providing);
+	}
 
-    /**
-     * @param LinkProviding $providing
-     * @return mixed
-     */
-    public function link(LinkProviding $providing)
-    {
-        return $providing->link(new RouterLink($this->router));
-    }
+	/**
+	 * @param LinkProviding $providing
+	 * @return mixed
+	 */
+	public function link(LinkProviding $providing)
+	{
+		return $providing->link(new RouterLink($this->router));
+	}
 }

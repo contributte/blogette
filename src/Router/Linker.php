@@ -5,9 +5,9 @@ namespace Blogette\Router;
 interface Linker
 {
 
-    /**
-     * @return string
-     */
-    public function build();
+	/**
+	 * @return string
+	 */
+	public function build();
 
 }
