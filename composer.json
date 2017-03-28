@@ -7,11 +7,11 @@
   "authors": [
     {
       "name": "Milan Felix Sulc",
-      "homepage": "http://jfx.cz"
+      "homepage": "https://jfx.cz"
     }
   ],
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.1",
     "nette/utils": "^3.0.0",
     "nette/finder": "^3.0.0"
   },
