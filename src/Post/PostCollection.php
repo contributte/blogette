@@ -43,13 +43,11 @@ final class PostCollection
 	 */
 	public function getNextOne($id)
 	{
-		$nextId = $id + 1;
+		$next = $this->getOne($id + 1);
 
-		if (isset($this->posts[$nextId])) {
-			return $this->posts[$nextId];
-		}
+		if ($next !== NULL) return $next;
 
-		return array_values($this->posts)[count($this->posts) - 1];
+		return $this->posts[count($this->posts) - 1];
 	}
 
 	/**
@@ -58,13 +56,11 @@ final class PostCollection
 	 */
 	public function getPreviousOne($id)
 	{
-		$prevId = $id - 1;
+		$prev = $this->getOne($id - 1);
 
-		if (isset($this->posts[$prevId])) {
-			return $this->posts[$prevId];
-		}
+		if ($prev !== NULL) return $prev;
 
-		return array_values($this->posts)[0];
+		return $this->posts[0];
 	}
 
 	/**
