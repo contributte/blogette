@@ -43,7 +43,7 @@ final class SimpleRouter implements Router
 	 */
 	public function setBase($base)
 	{
-		$this->base = rtrim($base, '/');
+		$this->base = trim($base, '/');
 	}
 
 	/**
@@ -60,7 +60,7 @@ final class SimpleRouter implements Router
 	 */
 	public function setHost($host)
 	{
-		$this->host = rtrim($host, '/');
+		$this->host = trim($host, '/');
 	}
 
 	/**
@@ -94,17 +94,20 @@ final class SimpleRouter implements Router
 	 */
 	public function construct($uri, array $options = [])
 	{
+		$url = '';
+
+		// Append host
 		if (isset($options[Router::ABSOLUTE]) && $options[Router::ABSOLUTE] === TRUE) {
-			$url = $this->host . '/' . $this->base;
-		} else {
-			$url = $this->base;
+			$url = $this->host;
 		}
 
-		// Build url
-		$url .= '/' . $uri;
+		// Append base url
+		if ($this->base) {
+			$url .= '/' . $this->base;
+		}
 
-		// Replace multiple slashes with single one
-		$url = Strings::replace($url, '#/{2,}#', '/');
+		// Append uri
+		$url .= sprintf('/%s', ltrim($uri, '/'));
 
 		// Drop index.html, it's not necessary
 		$url = Strings::replace($url, '#(.+)index.html$#', '$1');
