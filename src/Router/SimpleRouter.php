@@ -43,7 +43,7 @@ final class SimpleRouter implements Router
 	 */
 	public function setBase($base)
 	{
-		$this->base = trim($base, '/');
+		$this->base = '/' . ltrim($base, '/');
 	}
 
 	/**
@@ -60,7 +60,7 @@ final class SimpleRouter implements Router
 	 */
 	public function setHost($host)
 	{
-		$this->host = trim($host, '/');
+		$this->host = rtrim($host, '/') . '/';
 	}
 
 	/**
@@ -103,7 +103,7 @@ final class SimpleRouter implements Router
 
 		// Append base url
 		if ($this->base) {
-			$url .= '/' . $this->base;
+			$url .= '/' . ltrim($this->getBase(), '/');
 		}
 
 		// Append uri
