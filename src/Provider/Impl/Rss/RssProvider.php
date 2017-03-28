@@ -73,7 +73,7 @@ final class RssProvider extends UnifiedProvider
 				'link' => $compiler->link('post', ['id' => $post->id], [Router::ABSOLUTE => TRUE]),
 				'description' => strip_tags($post->perex),
 				'pubDate' => $post->date,
-				'guid' => sprintf('%s@%s', $post->id, $compiler->link('post', ['id' => $post->id], [Router::ABSOLUTE => TRUE])),
+				'guid' => sprintf('%s@%s', $post->id, $compiler->link(Router::SELF, [], [Router::ABSOLUTE => TRUE])),
 			]);
 		}
 
