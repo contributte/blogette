@@ -18,7 +18,7 @@ composer require blogette/platform
 
 ## Usage
 
-This is proof of conception. Main purpose was a create a simple concurrent to Jekylla and the others.
+This is proof of conception. Main purpose was a create a simple concurrent to Jekyll, Huge and the others.
 
 @todo
 
