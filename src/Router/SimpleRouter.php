@@ -7,6 +7,7 @@ use Blogette\Provider\Providing\LinkProviding;
 use Blogette\Router\Link\Link;
 use Blogette\Router\Link\ProviderLink;
 use Blogette\Router\Link\SelfLink;
+use Nette\Http\Url;
 use Nette\Utils\Strings;
 
 final class SimpleRouter implements Router
@@ -43,7 +44,7 @@ final class SimpleRouter implements Router
 	 */
 	public function setBase($base)
 	{
-		$this->base = '/' . ltrim($base, '/');
+		$this->base = ltrim($base, '/');
 	}
 
 	/**
@@ -60,7 +61,7 @@ final class SimpleRouter implements Router
 	 */
 	public function setHost($host)
 	{
-		$this->host = rtrim($host, '/') . '/';
+		$this->host = rtrim($host, '/');
 	}
 
 	/**
@@ -94,25 +95,27 @@ final class SimpleRouter implements Router
 	 */
 	public function construct($uri, array $options = [])
 	{
-		$url = '';
+		$url = new Url();
 
-		// Append host
+		// Setup host ============================
 		if (isset($options[Router::ABSOLUTE]) && $options[Router::ABSOLUTE] === TRUE) {
-			$url = $this->host;
+			$host = new Url($this->getHost());
+			$url->setScheme($host->getScheme());
+			$url->setHost($host->getHost());
 		}
 
-		// Append base url
+		// Setup path ============================
 		if ($this->base) {
-			$url .= '/' . ltrim($this->getBase(), '/');
+			$uri .= $this->getBase() . '/' . $uri;
 		}
-
-		// Append uri
-		$url .= sprintf('/%s', ltrim($uri, '/'));
 
 		// Drop index.html, it's not necessary
-		$url = Strings::replace($url, '#(.+)index.html$#', '$1');
+		$uri = Strings::replace($uri, '#(.+)index.html$#', '$1');
 
-		return $url;
+		// Set path
+		$url->setPath($uri);
+
+		return (string) $url;
 	}
 
 }
