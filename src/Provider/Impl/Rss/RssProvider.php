@@ -69,7 +69,7 @@ final class RssProvider extends UnifiedProvider
 		// Add posts to feed
 		foreach ($posts as $post) {
 			if ($this->endpoint->hasAttribute('guid')) {
-				$guid = sprintf('%s@%s', $this->endpoint->getAttribute('guid'));
+				$guid = sprintf('%s@%s', $post->id, $this->endpoint->getAttribute('guid'));
 			} else {
 				$guid = sprintf('%s@%s', $post->id, $compiler->link(Router::SELF, [], [Router::ABSOLUTE => TRUE]));
 			}
