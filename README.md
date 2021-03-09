@@ -12,7 +12,7 @@ Blogging platform based on Nette Framework.
 
 ## Install
 
-```sh
+```bash 
 composer require blogette/platform
 ```
 
