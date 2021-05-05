@@ -23,8 +23,6 @@
 
 ## Development
 
-See [how to contribute](https://contributte.org/contributing.html) to this package.
-
 This package was maintain by these authors.
 
 <a href="https://github.com/f3l1x">
