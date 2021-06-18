@@ -2,7 +2,9 @@
   "name": "blogette/platform",
   "description": "Blogette Platform",
   "type": "library",
-  "license": ["MIT"],
+  "license": [
+    "MIT"
+  ],
   "homepage": "https://github.com/blogette/platform",
   "authors": [
     {
@@ -66,14 +68,23 @@
       "qa": {
         "codesniffer": {
           "ruleset": "nette",
-          "folders": ["src", "tests"]
+          "folders": [
+            "src",
+            "tests"
+          ]
         },
         "codefixer": {
           "ruleset": "nette",
-          "folders": ["src", "tests"]
+          "folders": [
+            "src",
+            "tests"
+          ]
         },
         "linter": {
-          "folders": ["src", "tests"]
+          "folders": [
+            "src",
+            "tests"
+          ]
         }
       }
     }

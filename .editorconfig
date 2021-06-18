@@ -9,7 +9,7 @@ end_of_line = lf
 insert_final_newline = true
 
 # JS / PHP
-[*.{js,php,phpt}]
+[*.{js, php, phpt}]
 charset = utf-8
 indent_style = tab
 indent_size = 4
@@ -21,6 +21,6 @@ indent_style = tab
 indent_size = 4
 
 # Composer, NPM, Travis, BitbucketPipelines
-[{composer.json,package.json,.travis.yml,bitbucket-pipelines.yml}]
+[{composer.json, package.json, .travis.yml, bitbucket-pipelines.yml}]
 indent_style = space
 indent_size = 2
